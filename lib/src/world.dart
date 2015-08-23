@@ -618,13 +618,15 @@ Map<String, int> _consolidateUnits(Iterable<Unit> units) {
     }
   }
 
+  Set<String> toRemove = new Set();
   for (String key in result.keys) {
 //    result[key] = (result[key] * percentage).round();
     if (result[key] <= 1) {
       // We don't want to report "you are joined by 1 tanks" or whatever.
-      result.remove(key);
+      toRemove.add(key);
     }
   }
+  toRemove.forEach((key) => result.remove(key));
 
   return result;
 }
