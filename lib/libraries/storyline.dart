@@ -22,26 +22,26 @@ final Storyline storyline = new Storyline();
  */
 class Report {
   Report(this.string, {this.subject, this.object, this.owner, this.objectOwner,
-  this.but: false, this.positive: false, this.negative: false,
-  this.endSentence: false, this.startSentence: false,
-  this.wholeSentence: false, this.actionThread,
-  this.isSupportiveActionInThread: false, this.time});
+      this.but: false, this.positive: false, this.negative: false,
+      this.endSentence: false, this.startSentence: false,
+      this.wholeSentence: false, this.actionThread,
+      this.isSupportiveActionInThread: false, this.time});
 
   Report.empty()
-  : string = "",
-  subject = null,
-  object = null,
-  owner = null,
-  objectOwner = null,
-  but = false,
-  positive = false,
-  negative = false,
-  endSentence = false,
-  startSentence = false,
-  wholeSentence = false,
-  actionThread = null,
-  isSupportiveActionInThread = false,
-  time = null;
+      : string = "",
+        subject = null,
+        object = null,
+        owner = null,
+        objectOwner = null,
+        but = false,
+        positive = false,
+        negative = false,
+        endSentence = false,
+        startSentence = false,
+        wholeSentence = false,
+        actionThread = null,
+        isSupportiveActionInThread = false,
+        time = null;
 
   final String string;
   final Entity subject;
@@ -130,7 +130,7 @@ class Storyline {
   static const String OWNER_PRONOUN_POSSESIVE = "<ownerPronoun's>";
   static const String OBJECT_OWNER_PRONOUN = "<object-ownerPronoun>";
   static const String OBJECT_OWNER_PRONOUN_POSSESIVE =
-  "<object-ownerPronoun's>";
+      "<object-ownerPronoun's>";
   static const String ACTION = "<action>";
   static const String VERB_S = "<s>";
   static const String VERB_ES = "<es>";
@@ -144,7 +144,7 @@ class Storyline {
   static const String VERB_HAVE = "<has>";
 
   static final RegExp QUOTE_INTERPUNCTION_DUPLICATION =
-  new RegExp(r'''(\w)([\.\?\!])(["'])\.(?=$|\s)''');
+      new RegExp(r'''(\w)([\.\?\!])(["'])\.(?=$|\s)''');
 
   /**
    * Add another event to the story.
@@ -153,10 +153,10 @@ class Storyline {
    * letter, [wholeSentence] will automatically be [:true:] for convenience.
    */
   void add(String str, {Entity subject, Entity object, Entity owner,
-  Entity objectOwner, bool but: false, bool positive: false,
-  bool negative: false, bool endSentence: false, bool startSentence: false,
-  bool wholeSentence: false, int actionThread,
-  bool isSupportiveActionInThread: false, int time}) {
+      Entity objectOwner, bool but: false, bool positive: false,
+      bool negative: false, bool endSentence: false, bool startSentence: false,
+      bool wholeSentence: false, int actionThread,
+      bool isSupportiveActionInThread: false, int time}) {
     if (str == null || str == "") {
       return;
       // Ignore empty records.
@@ -167,24 +167,24 @@ class Storyline {
     }
 
     if ((str.endsWith(".") || str.endsWith("!") || str.endsWith("?")) &&
-    str.startsWith(new RegExp("[A-Z]"))) {
+        str.startsWith(new RegExp("[A-Z]"))) {
       wholeSentence = true;
     }
 
     reports.add(new Report(str,
-    subject: subject,
-    object: object,
-    owner: owner,
-    objectOwner: objectOwner,
-    but: but,
-    positive: positive,
-    negative: negative,
-    endSentence: endSentence,
-    startSentence: startSentence,
-    wholeSentence: wholeSentence,
-    actionThread: actionThread,
-    isSupportiveActionInThread: isSupportiveActionInThread,
-    time: time));
+        subject: subject,
+        object: object,
+        owner: owner,
+        objectOwner: objectOwner,
+        but: but,
+        positive: positive,
+        negative: negative,
+        endSentence: endSentence,
+        startSentence: startSentence,
+        wholeSentence: wholeSentence,
+        actionThread: actionThread,
+        isSupportiveActionInThread: isSupportiveActionInThread,
+        time: time));
   }
 
   /**
@@ -193,8 +193,8 @@ class Storyline {
    * You can provide "<also>" for a more human-like enumeration.
    */
   void addEnumeration(String start, Iterable<Entity> articles, String end,
-                      {Entity subject, Entity object, Entity owner, int maxPerSentence: 3,
-                      String conjuction: "and"}) {
+      {Entity subject, Entity object, Entity owner, int maxPerSentence: 3,
+      String conjuction: "and"}) {
     assert(start != null);
     assert(articles != null);
     if (articles.length == 0) {
@@ -203,10 +203,8 @@ class Storyline {
     }
     StringBuffer buf = new StringBuffer();
 
-    String removeAlso(String s) => s
-    .replaceAll("<also> ", "")
-    .replaceAll("  ", " ")
-    .trim();
+    String removeAlso(String s) =>
+        s.replaceAll("<also> ", "").replaceAll("  ", " ").trim();
     // TODO: less hacky
 
     buf.write(removeAlso(start)); // TODO: less hacky
@@ -243,10 +241,10 @@ class Storyline {
         }
         buf.write(".");
         add(buf.toString(),
-        subject: subject,
-        object: object,
-        owner: owner,
-        wholeSentence: true);
+            subject: subject,
+            object: object,
+            owner: owner,
+            wholeSentence: true);
         sentenceCount++;
         i = 0;
         buf.clear();
@@ -290,8 +288,8 @@ class Storyline {
 
   int timeSincePrevious(int i) {
     if (reports[i].time == null ||
-    !valid(i - 1) ||
-    reports[i - 1].time == null) return VERY_LONG_TIME;
+        !valid(i - 1) ||
+        reports[i - 1].time == null) return VERY_LONG_TIME;
     else return reports[i].time - reports[i - 1].time;
   }
 
@@ -309,7 +307,7 @@ class Storyline {
     if (reports[i][key1] == null || reports[j][key1] == null) return false;
     if (reports[i][key2] == null || reports[j][key2] == null) return false;
     if (reports[i][key1] == reports[j][key2] &&
-    reports[i][key2] == reports[j][key1]) return true;
+        reports[i][key2] == reports[j][key1]) return true;
     else return false;
   }
 
@@ -322,7 +320,7 @@ class Storyline {
     if (!valid(i) || !valid(j)) return false;
     // subject(i) == object(j), opposite sentiments => same sentiment
     if (exchanged('subject', 'object', i, j) &&
-    subject(i).isEnemyOf(subject(j))) {
+        subject(i).isEnemyOf(subject(j))) {
       if (reports[i].positive && reports[j].negative) return true;
       if (reports[i].negative && reports[j].positive) return true;
     }
@@ -336,7 +334,7 @@ class Storyline {
     if (!valid(i) || !valid(j)) return false;
     // subject(i) == object(j), both have same sentiment => opposite sentiment
     if (exchanged('subject', 'object', i, j) &&
-    subject(i).isEnemyOf(subject(j))) {
+        subject(i).isEnemyOf(subject(j))) {
       if (reports[i].positive && reports[j].positive) return true;
       if (reports[i].negative && reports[j].negative) return true;
     }
@@ -355,11 +353,11 @@ class Storyline {
   /// makes sure the sentence flows well with the previous sentence(s), then
   /// calls getString to do in-sentence substitution
   String substitute(int i, String str,
-                    {bool useSubjectPronoun: false, bool useObjectPronoun: false}) {
+      {bool useSubjectPronoun: false, bool useObjectPronoun: false}) {
     String result = str.replaceAll(ACTION, string(i));
     if ((useObjectPronoun || same('object', i, i - 1)) &&
-    !(object(i).pronoun == Pronoun.IT &&
-    subject(i).pronoun == Pronoun.IT)) {
+        !(object(i).pronoun == Pronoun.IT &&
+            subject(i).pronoun == Pronoun.IT)) {
       // if doing something to someone in succession, use pronoun
       // but not if the pronoun is "it" for both subject and object,
       // that makes sentences like "it makes it"
@@ -368,7 +366,7 @@ class Storyline {
       result = result.replaceAll(
           "$OBJECT_OWNER_POSSESIVE $OBJECT", object(i).pronoun.accusative);
       result = result.replaceAll("$OBJECT_OWNER_PRONOUN_POSSESIVE $OBJECT",
-      object(i).pronoun.accusative);
+          object(i).pronoun.accusative);
       result = result.replaceAll(OBJECT, object(i).pronoun.accusative);
       result = result.replaceAll(OBJECT_POSSESIVE, object(i).pronoun.genitive);
     }
@@ -380,15 +378,15 @@ class Storyline {
           "$OWNER_PRONOUN_POSSESIVE $SUBJECT", subject(i).pronoun.nominative);
       result = result.replaceAll(SUBJECT, subject(i).pronoun.nominative);
       result =
-      result.replaceAll(SUBJECT_POSSESIVE, subject(i).pronoun.genitive);
+          result.replaceAll(SUBJECT_POSSESIVE, subject(i).pronoun.genitive);
     }
     // if someone who was object last sentence is now subject
     // (and it's not misleading), use pronoun
     if (object(i - 1) != null &&
-    subject(i) != null &&
-    subject(i - 1) != null &&
-    object(i - 1) == subject(i) &&
-    subject(i - 1).pronoun != subject(i).pronoun) {
+        subject(i) != null &&
+        subject(i - 1) != null &&
+        object(i - 1) == subject(i) &&
+        subject(i - 1).pronoun != subject(i).pronoun) {
 
       // Never show "the guard's it".
       result = result.replaceAll(
@@ -397,33 +395,33 @@ class Storyline {
           "$OWNER_PRONOUN_POSSESIVE $SUBJECT", subject(i).pronoun.nominative);
       result = result.replaceAll(SUBJECT, subject(i).pronoun.nominative);
       result =
-      result.replaceAll(SUBJECT_POSSESIVE, subject(i).pronoun.genitive);
+          result.replaceAll(SUBJECT_POSSESIVE, subject(i).pronoun.genitive);
     }
     // same as previous, but with object-subject reversed
     if (subject(i - 1) != null &&
-    object(i) != null &&
-    subject(i - 1) != null &&
-    subject(i - 1) == object(i) &&
-    subject(i - 1).pronoun != subject(i).pronoun) {
+        object(i) != null &&
+        subject(i - 1) != null &&
+        subject(i - 1) == object(i) &&
+        subject(i - 1).pronoun != subject(i).pronoun) {
 
       // Never show "the guard's it".
       result = result.replaceAll(
           "$OBJECT_OWNER_POSSESIVE $OBJECT", object(i).pronoun.nominative);
       result = result.replaceAll("$OBJECT_OWNER_PRONOUN_POSSESIVE $OBJECT",
-      object(i).pronoun.nominative);
+          object(i).pronoun.nominative);
       result = result.replaceAll(OBJECT, object(i).pronoun.accusative);
       result = result.replaceAll(OBJECT_POSSESIVE, object(i).pronoun.genitive);
     }
     return getString(result,
-    subject: reports[i].subject,
-    object: reports[i].object,
-    owner: reports[i].owner,
-    objectOwner: reports[i].objectOwner);
+        subject: reports[i].subject,
+        object: reports[i].object,
+        owner: reports[i].owner,
+        objectOwner: reports[i].objectOwner);
   }
 
   /// Takes care of substitution of stopwords. Called by substitute().
   static String getString(String str,
-                          {Entity subject, Entity object, Entity owner, Entity objectOwner}) {
+      {Entity subject, Entity object, Entity owner, Entity objectOwner}) {
     String result = str;
     if (subject != null) {
       if (subject.isPlayer) {
@@ -454,7 +452,7 @@ class Storyline {
       result = result.replaceAll(SUBJECT, subject.pronoun.nominative);
 
       result =
-      addParticleToFirstOccurence(result, SUBJECT_NOUN, subject, owner);
+          addParticleToFirstOccurence(result, SUBJECT_NOUN, subject, owner);
       result = result.replaceFirst(SUBJECT_NOUN, subject.name);
 
       result = result.replaceAll(SUBJECT_PRONOUN, subject.pronoun.nominative);
@@ -476,7 +474,7 @@ class Storyline {
         result = result.replaceAll(OBJECT_POSSESIVE, Pronoun.YOU.genitive);
       } else {
         result =
-        addParticleToFirstOccurence(result, OBJECT, object, objectOwner);
+            addParticleToFirstOccurence(result, OBJECT, object, objectOwner);
         result = result.replaceAll(OBJECT, object.name);
         // TODO: change first to name, next to pronoun?
       }
@@ -490,25 +488,25 @@ class Storyline {
       result = result.replaceFirst(OBJECT_POSSESIVE, "${object.name}'s");
       result = result.replaceAll(OBJECT_POSSESIVE, object.pronoun.genitive);
       result =
-      result.replaceAll(OBJECT_PRONOUN_POSSESIVE, object.pronoun.genitive);
+          result.replaceAll(OBJECT_PRONOUN_POSSESIVE, object.pronoun.genitive);
     }
     result = _realizeOwner(owner, result, str, OWNER, OWNER_POSSESIVE,
-    OWNER_PRONOUN, OWNER_PRONOUN_POSSESIVE);
+        OWNER_PRONOUN, OWNER_PRONOUN_POSSESIVE);
     result = _realizeOwner(objectOwner, result, str, OBJECT_OWNER,
-    OBJECT_OWNER_POSSESIVE, OBJECT_OWNER_PRONOUN,
-    OBJECT_OWNER_PRONOUN_POSSESIVE);
+        OBJECT_OWNER_POSSESIVE, OBJECT_OWNER_PRONOUN,
+        OBJECT_OWNER_PRONOUN_POSSESIVE);
 
     return Randomly.parse(result);
   }
 
   static String _realizeOwner(Entity owner, String result, String str,
-                              String OWNER_OR_OBJECT_OWNER, String OWNER_OR_OBJECT_OWNER_POSSESSIVE,
-                              String OWNER_OR_OBJECT_OWNER_PRONOUN,
-                              String OWNER_OR_OBJECT_OWNER_PRONOUN_POSSESSIVE) {
+      String OWNER_OR_OBJECT_OWNER, String OWNER_OR_OBJECT_OWNER_POSSESSIVE,
+      String OWNER_OR_OBJECT_OWNER_PRONOUN,
+      String OWNER_OR_OBJECT_OWNER_PRONOUN_POSSESSIVE) {
     if (owner != null) {
       if (owner.isPlayer) {
         result =
-        result.replaceAll(OWNER_OR_OBJECT_OWNER, Pronoun.YOU.accusative);
+            result.replaceAll(OWNER_OR_OBJECT_OWNER, Pronoun.YOU.accusative);
         result = result.replaceAll(
             OWNER_OR_OBJECT_OWNER_POSSESSIVE, Pronoun.YOU.genitive);
       } else {
@@ -519,7 +517,7 @@ class Storyline {
       result = result.replaceAll(
           OWNER_OR_OBJECT_OWNER_PRONOUN, owner.pronoun.nominative);
       if (str.contains(new RegExp("$OWNER_OR_OBJECT_OWNER.+"
-      "$OWNER_OR_OBJECT_OWNER_POSSESSIVE"))) {
+          "$OWNER_OR_OBJECT_OWNER_POSSESSIVE"))) {
         // "the ship and her gun"
         result = result.replaceAll(
             OWNER_OR_OBJECT_OWNER_POSSESSIVE, owner.pronoun.genitive);
@@ -550,11 +548,11 @@ class Storyline {
       String string, String SUB_STRING, Entity entity, Entity entityOwner) {
     // Make sure we don't add particles to "your car" etc.
     if (entityOwner != null &&
-    (string.indexOf("$OWNER_POSSESIVE $SUB_STRING") != -1 ||
-    string.indexOf("$OWNER_PRONOUN_POSSESIVE $SUB_STRING") != -1 ||
-    string.indexOf("$OBJECT_OWNER_POSSESIVE $SUB_STRING") != -1 ||
-    string.indexOf("$OBJECT_OWNER_PRONOUN_POSSESIVE $SUB_STRING") !=
-    -1)) {
+        (string.indexOf("$OWNER_POSSESIVE $SUB_STRING") != -1 ||
+            string.indexOf("$OWNER_PRONOUN_POSSESIVE $SUB_STRING") != -1 ||
+            string.indexOf("$OBJECT_OWNER_POSSESIVE $SUB_STRING") != -1 ||
+            string.indexOf("$OBJECT_OWNER_PRONOUN_POSSESIVE $SUB_STRING") !=
+                -1)) {
       return string;
     }
 
@@ -563,7 +561,7 @@ class Storyline {
         string = string.replaceFirst(SUB_STRING, "the $SUB_STRING");
       } else {
         if (entity.name
-        .startsWith(new RegExp(r"[aeiouy]", caseSensitive: false))) {
+            .startsWith(new RegExp(r"[aeiouy]", caseSensitive: false))) {
           string = string.replaceFirst(SUB_STRING, "an $SUB_STRING");
         } else {
           string = string.replaceFirst(SUB_STRING, "a $SUB_STRING");
@@ -588,8 +586,8 @@ class Storyline {
         (List<Report> list, Report report) {
       Report previousReport = list.isNotEmpty ? list.last : null;
       if (previousReport != null &&
-      previousReport.isSupportiveActionInThread &&
-      report.actionThread == previousReport.actionThread) {
+          previousReport.isSupportiveActionInThread &&
+          report.actionThread == previousReport.actionThread) {
         // Skip the Report that is supportive and is next to another report
         // of the same actionThread.
         list[list.length - 1] = report;
@@ -615,22 +613,22 @@ class Storyline {
         // solve flow with previous sentence
         bool objectSubjectSwitch = exchanged('subject', 'object', i - 1, i);
         but = (reports[i].but || oppositeSentiment(i, i - 1)) &&
-        !reports[i - 1].but;
+            !reports[i - 1].but;
         reports[i].but = but;
         endPreviousSentence = (i - lastEndSentence >= MAX_SENTENCE_LENGTH) ||
-        endThisSentence ||
-        reports[i].startSentence ||
-        reports[i - 1].endSentence ||
-        reports[i].wholeSentence ||
-        !(same('subject', i, i - 1) || objectSubjectSwitch) ||
-        (but && (i - lastEndSentence > 1)) ||
-        (but && reports[i - 1].but) ||
-        (timeSincePrevious(i) > SHORT_TIME);
+            endThisSentence ||
+            reports[i].startSentence ||
+            reports[i - 1].endSentence ||
+            reports[i].wholeSentence ||
+            !(same('subject', i, i - 1) || objectSubjectSwitch) ||
+            (but && (i - lastEndSentence > 1)) ||
+            (but && reports[i - 1].but) ||
+            (timeSincePrevious(i) > SHORT_TIME);
         endThisSentence = false;
 
         if (endPreviousSentence) {
           if (reports[i - 1].wholeSentence) // don't write period after "Boom!"
-            strBuf.write(" ");
+              strBuf.write(" ");
           else strBuf.write(". ");
           if (but && !reports[i].wholeSentence) strBuf.write(Randomly.choose([
             "But ",
@@ -643,15 +641,15 @@ class Storyline {
           // let's try and glue [i-1] and [i] into one sentence
           if (but) {
             strBuf
-            .write(Randomly.choose([" but ", " but ", " yet ", ", but "]));
+                .write(Randomly.choose([" but ", " but ", " yet ", ", but "]));
             if (!sameSentiment(i, i + 1)) endThisSentence = true;
           } else {
             if (same('subject', i, i - 1) &&
-            string(i).startsWith("$SUBJECT ") &&
-            i < length - 1 &&
-            i - lastEndSentence < MAX_SENTENCE_LENGTH - 1 &&
-            !(timeSincePrevious(i + 1) >
-            SHORT_TIME) /* Makes the sentence end. TODO: check for all sentence ending logic. */) {
+                string(i).startsWith("$SUBJECT ") &&
+                i < length - 1 &&
+                i - lastEndSentence < MAX_SENTENCE_LENGTH - 1 &&
+                !(timeSincePrevious(i + 1) >
+                    SHORT_TIME) /* Makes the sentence end. TODO: check for all sentence ending logic. */) {
               strBuf.write(", ");
             } else {
               strBuf.write(Randomly.choose([" and ", " and ", ", and "]));
@@ -664,8 +662,8 @@ class Storyline {
       String report = string(i);
       // clear subjects when e.g. "Wolf hits you, it growls, it strikes again."
       if (!endPreviousSentence) if (same('subject', i, i - 1)) if (string(i - 1)
-      .startsWith("$SUBJECT ")) if (report.startsWith("$SUBJECT ")) report =
-      report.replaceFirst("$SUBJECT ", "");
+          .startsWith("$SUBJECT ")) if (report.startsWith("$SUBJECT ")) report =
+              report.replaceFirst("$SUBJECT ", "");
 
       report = substitute(i, report);
 

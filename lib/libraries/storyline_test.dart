@@ -26,7 +26,7 @@ void main() {
   });
 
   test("storyline.addParagraph", () {
-        var storyline = new Storyline();
+    var storyline = new Storyline();
     var player = new Player();
     var gorilla = new Actor(
         name: "Gorilla",
@@ -36,7 +36,7 @@ void main() {
     storyline.add(
         "The ship trembles. There is something wrong with the engines.",
         wholeSentence: true);
-        storyline.addParagraph();
+    storyline.addParagraph();
     storyline.add("<subject> gesture<s> to <subject's> <object>",
         subject: player, object: gorilla);
     expect(storyline.toString(), contains("\n\n"));

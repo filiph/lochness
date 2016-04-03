@@ -2,7 +2,7 @@ Title:    Loch Ness
 Author:   Filip Hracek
 UniqueID: net.filiph.lochness.0.0.1
 
-<import 'package:lochness/lochness.dart'/>
+<import 'package:lochness/lochness_lib.dart'/>
 
 <declare>
     Game game;

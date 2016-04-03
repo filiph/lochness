@@ -9,8 +9,8 @@ part of storyline;
  */
 class Entity {
   Entity.withOptions(this.name, {this.pronoun: Pronoun.IT,
-  this.team: Actor.NEUTRAL, this.isPlayer: false,
-  this.nameIsProperNoun: false, this.alreadyMentioned: true});
+      this.team: Actor.NEUTRAL, this.isPlayer: false,
+      this.nameIsProperNoun: false, this.alreadyMentioned: true});
 
   Entity(
       this.name, this.nameIsProperNoun, this.pronoun, this.team, this.isPlayer);
@@ -95,8 +95,8 @@ class Entity {
  */
 class Actor extends Entity {
   Actor({String name, bool nameIsProperNoun: false, int team: NEUTRAL,
-        bool isPlayer: false, Pronoun pronoun: Pronoun.IT})
-  : super(name, nameIsProperNoun, pronoun, team, isPlayer);
+      bool isPlayer: false, Pronoun pronoun: Pronoun.IT})
+      : super(name, nameIsProperNoun, pronoun, team, isPlayer);
 
   static const int NEUTRAL = 0;
   static const int FRIEND = 1;
@@ -110,9 +110,8 @@ class Actor extends Entity {
 
 class Player extends Actor {
   Player() : super(
-      name: "player",
-      pronoun: Pronoun.YOU,
-      team: Actor.FRIEND,
-      isPlayer: true) {
-  }
+          name: "player",
+          pronoun: Pronoun.YOU,
+          team: Actor.FRIEND,
+          isPlayer: true) {}
 }

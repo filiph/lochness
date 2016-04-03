@@ -6,3 +6,8 @@
 build/
 packages
 pubspec.lock
+
+.sass-cache
+web/*.html.dart
+web/stylesheets/*.css
+web/stylesheets/*.css.map
